@@ -53,6 +53,20 @@ as listed. All coordinates are metres, Y-up, rotations are quaternions
 The whole part record rides the GLB in node `extras.part`; the stable node
 id rides in `extras.scene_id`, so identities survive export/import.
 
+## Image prep (photos → generative massing input)
+
+Needs `CLOUDFLARE_ACCOUNT_ID` / `CLOUDFLARE_API_TOKEN` (from `env/.env`, nearest
+ancestor directory); clutter removal and masking also need Docker (IOPaint/LaMa,
+CPU). These tools don't touch the scene — they prepare photos for `scene-gen`.
+
+| Tool | Parameters | Notes |
+|---|---|---|
+| `detect_objects` | `image`, `targets` | Text-phrase detection (Workers AI moondream); returns normalized bboxes per target: `{target: [{x_min,y_min,x_max,y_max}]}` |
+| `prep_image` | `image`, `target?`, `margin?`, `remove?`, `output?` | One-stop prep: optionally inpaint away `remove` clutter phrases (e.g. `["bicycle"]`), detect `target` (default `"the building"`), crop with margin (default 0.06). Writes `{stem}-prep.jpg`, mask/cleaned intermediates, and a `-prep.json` report to `output` (default `tmp/prep`) |
+| `inpaint_image` | `image`, `mask`, `output?` | LaMa inpainting (IOPaint in Docker); mask: white = remove, same dimensions as image. Returns cleaned path |
+
+Feed the cropped `-prep.jpg` into `scene-gen` (references/generation.md).
+
 ## Viewer interaction (needs scene-api running)
 
 | Tool | Parameters | Notes |

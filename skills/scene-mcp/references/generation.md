@@ -14,6 +14,21 @@ measurable geometry. It is the fast alternative to SfM/photogrammetry
   that must be measured. Use real measurements and parametric primitives
   for that, or SfM for measured reconstruction.
 
+## Prep the photo first
+
+Raw photos usually have clutter (cars, bins, vegetation) and excess margin.
+Use the MCP prep tools before generating — see references/tools.md
+("Image prep") for parameters:
+
+```
+prep_image {image: "site.jpg", target: "the building",
+            remove: ["car", "rubbish bin"], output: "tmp/prep"}
+```
+
+Then generate from the cropped result: `scene-gen single tmp/prep/site-prep.jpg`.
+For manual control, `detect_objects` gives bounding boxes and `inpaint_image`
+removes regions from a hand-built mask.
+
 ## Usage
 
 ```bash

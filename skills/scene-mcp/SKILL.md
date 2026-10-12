@@ -4,7 +4,7 @@ description: Build and edit 3D scenes, architectural models, and diagrams throug
 license: MIT
 metadata:
   author: fluid-notion-labs
-  version: "0.2.0"
+  version: "0.2.1"
   domain: 3d
   triggers: scene-mcp, 3D scene, GLB, glTF, architectural model, 3D diagram, massing, bill of materials, photo camera, viewer
   role: specialist
@@ -69,5 +69,5 @@ Load detailed guidance based on context:
 | Full tool surface | `references/tools.md` | Exact parameters, all 25+ tools |
 | Diagram authoring | `references/patterns.md` | Flowcharts, architecture maps, layout math |
 | Viewer & live sync | `references/viewer.md` | scene-api, SSE, logs, photos, cameras |
-| Generating from photos | `references/generation.md` | scene-gen CLI, Meshy/Tripo, scale normalization |
+| Generating from photos | `references/generation.md` | Photo prep (detect/inpaint/crop), scene-gen CLI, Meshy/Tripo, scale normalization |
 | Materials & BOM | `references/materials-bom.md` | Material kinds, part info, aggregation |
